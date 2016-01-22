@@ -1,7 +1,7 @@
 {
   "name": "hubot-traffic",
   "description": "A hubot script returning you the traffic time between two points.",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "Florian Meskens <florian.meskens@gmail.com>",
   "license": "MIT",
 
