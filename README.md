@@ -8,19 +8,25 @@ See [`src/traffic-status.coffee`](src/traffic-status.coffee) for full documentat
 
 In hubot project repo, run:
 
-`npm install hubot-traffic-status --save`
+`npm install hubot-traffic --save`
 
-Then add **hubot-traffic-status** to your `external-scripts.json`:
+Then add **hubot-traffic** to your `external-scripts.json`:
 
 ```json
 [
-  "hubot-traffic-status"
+  "hubot-traffic"
 ]
 ```
 
 ## Sample Interaction
 
 ```
-user1>> hubot hello
-hubot>> hello!
+user1>> hubot traffic home is Where the Hatred is
+hubot>> Home is set to Where the Hatred is
+
+user1>> hubot traffic work is Where the Love is
+hubot>> Work is set to Where the Love is
+
+user1>> hubot i wanna go home
+hubot>> From Where the Love is to Where the Hatred is, it will take 34 mins
 ```
