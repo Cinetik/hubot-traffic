@@ -1,7 +1,7 @@
 {
-  "name": "hubot-traffic-status",
+  "name": "hubot-traffic",
   "description": "A hubot script returning you the traffic time between two points.",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "author": "Florian Meskens <florian.meskens@gmail.com>",
   "license": "MIT",
 
@@ -9,11 +9,11 @@
 
   "repository": {
     "type": "git",
-    "url": "git://github.com/hubot-scripts/hubot-traffic-status.git"
+    "url": "git://github.com/cinetik/hubot-traffic.git"
   },
 
   "bugs": {
-    "url": "https://github.com/hubot-scripts/hubot-traffic-status/issues"
+    "url": "https://github.com/cinetik/hubot-traffic/issues"
   },
 
   "dependencies": {
