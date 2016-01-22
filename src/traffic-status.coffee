@@ -19,11 +19,21 @@ module.exports = (robot) ->
 		@userbrain = robot.brain.userForName(msg.message.user.name)
 		@userbrain.work = msg.match[1]
 		msg.send "Work is now set to #{msg.match[1]}"
+	robot.respond /traffic mode is (.*)/i, (msg) ->
+		@userbrain = robot.brain.userForName(msg.message.user.name)
+		modes = ['driving','walking','bicycling']
+		if msg.match[1] in modes
+		    @userbrain.mode = msg.match[1]
+		    msg.send "Mode is now set to #{msg.match[1]}"
+        else
+            msg.send "Mode has to either be driving,walking or bicycling"
 	robot.respond /i wanna go home/i, (msg) ->
 		@userbrain = robot.brain.userForName(msg.message.user.name)
+		if not @userbrain.mode
+		    @userbrain.mode = "driving"
 		if @userbrain.home and @userbrain.work
 			msg.http("https://maps.googleapis.com/maps/api/distancematrix/json")
-				.query({origins: "#{@userbrain.work}", destinations: "#{@userbrain.home}", mode: "driving", departure_time: "now"})
+				.query({origins: "#{@userbrain.work}", destinations: "#{@userbrain.home}", mode: "#{@userbrain.mode}", departure_time: "now"})
 				.header('Accept', 'application/json')
 				.get() (err, res, body) ->
 					if err
