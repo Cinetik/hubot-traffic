@@ -1,4 +1,4 @@
-# hubot-traffic-status
+# hubot-traffic
 
 A hubot script returning you the traffic time between two points.
 
@@ -18,6 +18,10 @@ Then add **hubot-traffic** to your `external-scripts.json`:
 ]
 ```
 
+## Configuration
+
+* HUBOT_DISTANCE_MATRIX_API_KEY - your Google Distance Matrix API Key (Required if you use transit as mode)
+
 ## Sample Interaction
 
 ```
@@ -26,6 +30,9 @@ hubot>> Home is set to Where the Hatred is
 
 user1>> hubot traffic work is Where the Love is
 hubot>> Work is set to Where the Love is
+
+user1>> hubot traffic mode is <driving, walking, bicycling, transit>
+hubot>> Mode is set to <driving, walking, bicycling, transit>
 
 user1>> hubot i wanna go home
 hubot>> From Where the Love is to Where the Hatred is, it will take 34 mins
