@@ -48,7 +48,7 @@ module.exports = (robot) ->
 					return
 		else
 			msg.send "You need to set your home and work address in my brain, #{msg.message.user.name}"
-		robot.respond /i wanna be home by (\d\d)(?:h|:)(\d\d)/i, (msg) ->
+	robot.respond /i wanna be home by (\d\d)(?:h|:)(\d\d)/i, (msg) ->
 		@userbrain = robot.brain.userForName(msg.message.user.name)
 		if not @userbrain.mode
 			@userbrain.mode = "transit"
@@ -77,3 +77,4 @@ module.exports = (robot) ->
 			msg.send "You must use the 'transit' mode to use this feature, #{msg.message.user.name}"
 		else
 			msg.send "You need to set your home and work address in my brain, #{msg.message.user.name}"
+	robot.respond
