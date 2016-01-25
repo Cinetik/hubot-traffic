@@ -42,6 +42,8 @@ module.exports = (robot) ->
 						msg.send "#{err}"
 						return
 					data = JSON.parse body
+					if data.error_message
+						msg.send "Error: #{data.error_message}"
 					msg.send "From #{data.origin_addresses[0]} to #{data.destination_addresses[0]}, it will take #{data.rows[0].elements[0].duration.text}"
 					return
 		else
