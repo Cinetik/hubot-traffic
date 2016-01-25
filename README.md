@@ -36,4 +36,7 @@ hubot>> Mode is set to <driving, walking, bicycling, transit>
 
 user1>> hubot i wanna go home
 hubot>> From Where the Love is to Where the Hatred is, it will take 34 mins
+
+user1>> hubot i wanna be home by <12h00, 12am>
+hubot>> From Where the Love is to Where the Hatred is, you'll have to leave at <11h26, 11:26am>
 ```
