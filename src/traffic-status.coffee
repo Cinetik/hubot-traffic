@@ -10,7 +10,7 @@
 #   Florian Meskens <florian.meskens@gmail.com>
 
 module.exports = (robot) ->
-	api_key = process.env.HUBOT_DISTANCE_MATRIX_API_KEY or '';
+	api_key = process.env.HUBOT_DISTANCE_MATRIX_API_KEY or ''
 	robot.respond /traffic home is (.*)/i, (msg) ->
 		@userbrain = robot.brain.userForName(msg.message.user.name)
 		@userbrain.home = msg.match[1]
@@ -35,7 +35,7 @@ module.exports = (robot) ->
 			@userbrain.mode = "driving"
 		if @userbrain.home and @userbrain.work
 			msg.http("https://maps.googleapis.com/maps/api/distancematrix/json")
-				.query({origins: "#{@userbrain.work}", destinations: "#{@userbrain.home}", mode: "#{@userbrain.mode}", departure_time: "now"})
+				.query({origins: "#{@userbrain.work}", destinations: "#{@userbrain.home}", mode: "#{@userbrain.mode}", departure_time: "now", key: api_key})
 				.header('Accept', 'application/json')
 				.get() (err, res, body) ->
 					if err
