@@ -48,3 +48,32 @@ module.exports = (robot) ->
 					return
 		else
 			msg.send "You need to set your home and work address in my brain, #{msg.message.user.name}"
+		robot.respond /i wanna be home by (\d\d)(?:h|:)(\d\d)/i, (msg) ->
+		@userbrain = robot.brain.userForName(msg.message.user.name)
+		if not @userbrain.mode
+			@userbrain.mode = "transit"
+		if @userbrain.mode == "transit" and @userbrain.home and @userbrain.work
+			arrivaltime = new Date()
+			arrivaltime.setHours(msg.match[1])
+			arrivaltime.setMinutes(msg.match[2])
+			arrivaltime = Math.round(arrivaltime / 1000)
+			msg.http("https://maps.googleapis.com/maps/api/distancematrix/json")
+				.query({origins: "#{@userbrain.work}", destinations: "#{@userbrain.home}", mode: "#{@userbrain.mode}", arrival_time: arrivaltime, key: api_key})
+				.header('Accept', 'application/json')
+				.get() (err, res, body) ->
+					if err
+						msg.send "#{err}"
+						return
+					data = JSON.parse body
+					if data.error_message
+						msg.send "Error: #{data.error_message}"
+					departuretime = new Date((arrivaltime - (data.rows[0].elements[0].duration.value))*1000)
+					if departuretime.getMinutes() < 10
+						msg.send "From #{data.origin_addresses[0]} to #{data.destination_addresses[0]}, you'll have to leave at #{departuretime.getHours()}h0#{departuretime.getMinutes()}"
+					else
+						msg.send "From #{data.origin_addresses[0]} to #{data.destination_addresses[0]}, you'll have to leave at #{departuretime.getHours()}h#{departuretime.getMinutes()}"
+					return
+		else if @userbrain.mode != "transit"
+			msg.send "You must use the 'transit' mode to use this feature, #{msg.message.user.name}"
+		else
+			msg.send "You need to set your home and work address in my brain, #{msg.message.user.name}"
