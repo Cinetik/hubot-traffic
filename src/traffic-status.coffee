@@ -45,7 +45,8 @@ module.exports = (robot) ->
 					data = JSON.parse body
 					if data.error_message
 						msg.send "Error: #{data.error_message}"
-					msg.send "From #{data.origin_addresses[0]} to #{data.destination_addresses[0]}, it will take #{data.rows[0].elements[0].duration.text}"
+					duration = if data.rows[0].elements[0].duration_in_traffic then data.rows[0].elements[0].duration_in_traffic.text else data.rows[0].elements[0].duration.text
+					msg.send "From #{data.origin_addresses[0]} to #{data.destination_addresses[0]}, it will take #{duration}"
 					return
 		else
 			msg.send "You need to set your home and work address in my brain, #{msg.message.user.name}"
