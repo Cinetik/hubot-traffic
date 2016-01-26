@@ -36,7 +36,7 @@ module.exports = (robot) ->
 			@userbrain.mode = default_travel_mode
 		if @userbrain.home and @userbrain.work
 			msg.http("https://maps.googleapis.com/maps/api/distancematrix/json")
-				.query({origins: "#{@userbrain.work}", destinations: "#{@userbrain.home}", mode: "#{@userbrain.mode}", departure_time: "now", key: api_key}, traffic_model: "best_guess")
+				.query({origins: "#{@userbrain.work}", destinations: "#{@userbrain.home}", mode: "#{@userbrain.mode}", departure_time: "now", key: api_key})
 				.header('Accept', 'application/json')
 				.get() (err, res, body) ->
 					if err
